@@ -1,5 +1,8 @@
 # BitBar Death Clock Plugin
 
+This is what it looks like
+![death clock plugin](pic/demo_pic.jpg "Death Clock")
+
 Install https://github.com/matryer/bitbar if you haven't.
 Put [DClock.sh](DClock/DClock.sh) into your plugin directory.
 
