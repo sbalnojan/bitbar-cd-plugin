@@ -18,6 +18,14 @@ fi
 
 #DEATH_DATE_STR="2020-11-07"
 DEATH_DATE=$(date -jf "%Y-%m-%d" $DEATH_DATE_STR)
+DEATH_SEC=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR} +"%s")
+
 CURR_DATE=$(date)
-echo $CURR_DATE
-echo $DEATH_DATE
+CURR_SEC=$(date +"%s")
+
+DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
+PROJ=$((DIFF/(365*4)))
+BK=$((BOOKS_A_YEAR * DIFF/365))
+echo "${DIFF} days"
+echo "${PROJ} projects"
+echo "${BK} books"
