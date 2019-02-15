@@ -25,7 +25,11 @@ CURR_SEC=$(date +"%s")
 
 DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
 PROJ=$((DIFF/(365*4)))
-BK=$((BOOKS_A_YEAR * DIFF/365))
 echo "${DIFF} days"
 echo "${PROJ} projects"
-echo "${BK} books"
+
+if [ -n "$BOOKS_A_YEAR" ]
+  then
+    BK=$((BOOKS_A_YEAR * DIFF/365))
+    echo "${BK} books"
+fi
