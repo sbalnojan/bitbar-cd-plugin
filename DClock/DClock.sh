@@ -26,6 +26,7 @@ CURR_SEC=$(date +"%s")
 DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
 PROJ=$((DIFF/(365*4)))
 echo "${DIFF} days"
+echo "---"
 echo "${PROJ} projects"
 
 if [ -n "$BOOKS_A_YEAR" ]
