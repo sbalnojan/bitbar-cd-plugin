@@ -16,10 +16,6 @@ else
     . .dc_config.cfg
 fi
 
-if [[ QUARTER_PROGRESS ]]
-  then
-    echo "QUARTER PROGRESS active."
-fi
 
 #DEATH_DATE_STR="2020-11-07"
 DEATH_DATE=$(date -jf "%Y-%m-%d" $DEATH_DATE_STR)
@@ -30,6 +26,25 @@ CURR_SEC=$(date +"%s")
 
 DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
 PROJ=$((DIFF/(365*4)))
+YEARS=$((DIFF/365))
+DAYS_THIS_YEAR=$((DIFF-YEARS*365))
+if [[ QUARTER_PROGRESS ]]
+  then
+    echo "QUARTER PROGRESS active."
+    echo "${YEARS} years"
+    echo "${DAYS_THIS_YEAR} days this year"
+    if [[ "$DAYS_THIS_YEAR" -gt "270" ]]
+      then
+        echo "Quarter 4"
+    elif [[ "$DAYS_THIS_YEAR" -gt "180" && "$DAYS_THIS_YEAR" -lt "270" ]]
+      then
+        echo "Quarter 3"
+    elif [[ "$DAYS_THIS_YEAR" -gt "90" && "$DAYS_THIS_YEAR" -lt "180" ]]
+        echo "Quarter 2"
+    else
+        echo "Quarter 1"
+fi
+
 echo "${DIFF} days"
 echo "---"
 echo "${PROJ} projects"

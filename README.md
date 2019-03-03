@@ -2,12 +2,12 @@
 
 This BitBar plugin, called "Death Clock" shows two things in your Mac OS X menu bar:
 
-- the days you have left to live
+- the days you have left to live,
 - (optionally) the % progress of this quarter.
 
 and on click it additionally shows:
 
-- the amount of books you will still be able to read in your life
+- (optionally) the amount of books you will still be able to read in your life,
 - the 4 year projects you can still complete within the days left.
 
 # Take a Look
@@ -29,16 +29,18 @@ DEATH_DATE_STR="2025-11-07"
 BOOKS_A_YEAR=20
 ```
 
+The BOOKS_A_YEAR is optional.
+
 ## Enable Quarter Progress
 
 If you want to additionally show the progress of the current quarter (for instance
-because you set yourself OKRs quarterwise), you can do that by adding this line
+because you set yourself OKRs quarter-wise), you can do that by adding this line
 to your .dc_config.cfg:
 
 ```bash
 DEATH_DATE_STR="2025-11-07"
 BOOKS_A_YEAR=20
-QUARTER_PROGRESS=Ttrue
+QUARTER_PROGRESS=true
 ```
 
 where DEATH_DATE_STR denotes your personal death date in %Y-%M-%d format,
