@@ -16,6 +16,11 @@ else
     . .dc_config.cfg
 fi
 
+if [[ QUARTER_PROGRESS ]]
+  then
+    echo "QUARTER PROGRESS active."
+fi
+
 #DEATH_DATE_STR="2020-11-07"
 DEATH_DATE=$(date -jf "%Y-%m-%d" $DEATH_DATE_STR)
 DEATH_SEC=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR} +"%s")
