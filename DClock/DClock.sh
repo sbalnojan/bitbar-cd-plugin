@@ -15,59 +15,53 @@
 #   Returns: 22%
 #
 function print_quarter_prog {
-  local DAYS_THIS_YEAR=$1
+  local days_this_year=$1
 
-  if [[ "$DAYS_THIS_YEAR" -gt "270" ]]
-    then
-      echo "$(( (365-DAYS_THIS_YEAR)*100/90 ))%"
-  elif [[ "$DAYS_THIS_YEAR" -gt "180" && "$DAYS_THIS_YEAR" -lt "270" ]]
-    then
-      echo "$(( (270-DAYS_THIS_YEAR)*100/90 ))%"
-  elif [[ "$DAYS_THIS_YEAR" -gt "90" && "$DAYS_THIS_YEAR" -lt "180" ]]
-    then
-      echo "$(( (180-DAYS_THIS_YEAR)*100/90 ))%"
+  if [[ "${days_this_year}" -gt "270" ]]; then
+      echo "$(( (365-days_this_year)*100/90 ))%"
+  elif [[ "${days_this_year}" -gt "180" && "${days_this_year}" -lt "270" ]]; then
+      echo "$(( (270-days_this_year)*100/90 ))%"
+  elif [[ "${days_this_year}" -gt "90" && "${days_this_year}" -lt "180" ]]; then
+      echo "$(( (180-days_this_year)*100/90 ))%"
   else
-      echo "$(( (DAYS_THIS_YEAR)*100/90 ))%"
+      echo "$(( (days_this_year)*100/90 ))%"
   fi
 }
 
 function main {
-  if [ -z "$1" ]
-    then
+  if [[ -z "$1" ]]; then
       . ~/.dc_config.cfg
   else
       . .dc_config.cfg
   fi
 
-  DEATH_DATE=$(date -jf "%Y-%m-%d" $DEATH_DATE_STR)
+  DEATH_DATE=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR})
   DEATH_SEC=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR} +"%s")
 
-  CURR_DATE=$(date)
-  CURR_SEC=$(date +"%s")
+  curr_date=$(date)
+  curr_sec=$(date +"%s")
 
-  DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
-  PROJ=$((DIFF/(365*4)))
-  YEARS=$((DIFF/365))
-  DAYS_THIS_YEAR=$((DIFF-YEARS*365))
+  diff=$(((DEATH_SEC - curr_sec)/(86400)))
+  proj=$((diff/(365*4)))
+  years=$((diff/365))
+  days_this_year=$((diff-years*365))
 
-  if [[ QUARTER_PROGRESS ]]
-    then
-      ADD_THIS="($( print_quarter_prog $DAYS_THIS_YEAR ))"
-      ADD_THAT="$( print_quarter_prog $DAYS_THIS_YEAR ) left of quarter"
+  if [[ QUARTER_PROGRESS ]]; then
+      add_this="($( print_quarter_prog $days_this_year ))"
+      add_that="$( print_quarter_prog $days_this_year ) left of quarter"
   fi
 
-  echo "${DIFF} days ${ADD_THIS}"
+  echo "${diff} days ${add_this}"
   echo "---"
-  if [[ -n $ADD_THAT ]]; then
-    echo $ADD_THAT
+  if [[ -n "${add_that}" ]]; then
+    echo $add_that
   fi
 
-  echo "${PROJ} projects"
+  echo "${proj} projects"
 
-  if [ -n "$BOOKS_A_YEAR" ]
-    then
-      BK=$((BOOKS_A_YEAR * DIFF/365))
-      echo "${BK} books"
+  if [ -n "${BOOKS_A_YEAR}" ]; then
+      bk=$((BOOKS_A_YEAR * diff/365))
+      echo "${bk} books"
   fi
 }
 
