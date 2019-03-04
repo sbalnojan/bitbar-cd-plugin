@@ -14,7 +14,7 @@ and on click it additionally shows:
 
 This is what it looks like
 
-![death clock plugin](pic/demo_pic.jpg "Death Clock")
+![death clock plugin](pic/demo.gif "Death Clock")
 
 # Installation
 
