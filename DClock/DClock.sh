@@ -1,6 +1,6 @@
 #!/bin/sh
 # <bitbar.title>Death Clock</bitbar.title>
-# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.version>v1.1</bitbar.version>
 # <bitbar.author>Sven Balnojan</bitbar.author>
 # <bitbar.author.github>sbalnojan</bitbar.author.github>
 # <bitbar.desc>Shows time left to live.</bitbar.desc>
@@ -54,7 +54,7 @@ function print_quarter_prog {
 if [[ QUARTER_PROGRESS ]]
   then
     ADD_THIS="($( print_quarter_prog $DAYS_THIS_YEAR ))"
-    ADD_THAT="$( print_quarter_prog $DAYS_THIS_YEAR ) of quarter"
+    ADD_THAT="$( print_quarter_prog $DAYS_THIS_YEAR ) left of quarter"
 fi
 
 echo "${DIFF} days ${ADD_THIS}"
