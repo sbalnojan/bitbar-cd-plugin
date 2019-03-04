@@ -7,7 +7,6 @@
 # <bitbar.dependencies></bitbar.dependencies>
 
 # Dependencies:
-#   jq (https://stedolan.github.io/jq/)
 
 if [ -z "$1" ]
   then
@@ -28,25 +27,42 @@ DIFF=$(((DEATH_SEC - CURR_SEC)/(86400)))
 PROJ=$((DIFF/(365*4)))
 YEARS=$((DIFF/365))
 DAYS_THIS_YEAR=$((DIFF-YEARS*365))
+
+# prints the progress of the current quarter
+#
+# Examples:
+# print_quarter_prog 250
+#   Returns: 22%
+#
+function print_quarter_prog {
+  DAYS_THIS_YEAR=$1
+
+  if [[ "$DAYS_THIS_YEAR" -gt "270" ]]
+    then
+      echo "$(( (365-DAYS_THIS_YEAR)*100/90 ))%"
+  elif [[ "$DAYS_THIS_YEAR" -gt "180" && "$DAYS_THIS_YEAR" -lt "270" ]]
+    then
+      echo "$(( (270-DAYS_THIS_YEAR)*100/90 ))%"
+  elif [[ "$DAYS_THIS_YEAR" -gt "90" && "$DAYS_THIS_YEAR" -lt "180" ]]
+    then
+      echo "$(( (180-DAYS_THIS_YEAR)*100/90 ))%"
+  else
+      echo "$(( (DAYS_THIS_YEAR)*100/90 ))%"
+  fi
+}
+
 if [[ QUARTER_PROGRESS ]]
   then
-    echo "QUARTER PROGRESS active."
-    echo "${YEARS} years"
-    echo "${DAYS_THIS_YEAR} days this year"
-    if [[ "$DAYS_THIS_YEAR" -gt "270" ]]
-      then
-        echo "Quarter 4"
-    elif [[ "$DAYS_THIS_YEAR" -gt "180" && "$DAYS_THIS_YEAR" -lt "270" ]]
-      then
-        echo "Quarter 3"
-    elif [[ "$DAYS_THIS_YEAR" -gt "90" && "$DAYS_THIS_YEAR" -lt "180" ]]
-        echo "Quarter 2"
-    else
-        echo "Quarter 1"
+    ADD_THIS="($( print_quarter_prog $DAYS_THIS_YEAR ))"
+    ADD_THAT="$( print_quarter_prog $DAYS_THIS_YEAR ) of quarter"
 fi
 
-echo "${DIFF} days"
+echo "${DIFF} days ${ADD_THIS}"
 echo "---"
+if [[ -n $ADD_THAT ]]; then
+  echo $ADD_THAT
+fi
+
 echo "${PROJ} projects"
 
 if [ -n "$BOOKS_A_YEAR" ]
