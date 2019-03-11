@@ -6,6 +6,11 @@
 # <bitbar.desc>Shows time left to live.</bitbar.desc>
 # <bitbar.dependencies></bitbar.dependencies>
 
+<<<<<<< HEAD
+=======
+# Dependencies:
+
+>>>>>>> 6ce3fe111cfb47a80767ddba189e007de648a313
 # prints the progress of the current quarter
 #
 # Examples:
@@ -26,6 +31,7 @@ function print_quarter_prog {
   fi
 }
 
+<<<<<<< HEAD
 # prints full years left till some date.
 #
 # Examples:
@@ -89,6 +95,8 @@ function calc_days_this_year {
   echo "$(( 365-$DAYS_THIS_YEAR))"
 }
 
+=======
+>>>>>>> 6ce3fe111cfb47a80767ddba189e007de648a313
 function main {
   if [[ -z "$1" ]]; then
       . ~/.dc_config.cfg
@@ -96,11 +104,24 @@ function main {
       . .dc_config.cfg
   fi
 
+<<<<<<< HEAD
   diff="$( calc_days_left $DEATH_DATE_STR )"
   proj=$((diff/(365*4)))
   years=$((diff/365))
 
   days_this_year="$( calc_days_this_year ${DEATH_DATE_STR} )"
+=======
+  DEATH_DATE=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR})
+  DEATH_SEC=$(date -jf "%Y-%m-%d" ${DEATH_DATE_STR} +"%s")
+
+  curr_date=$(date)
+  curr_sec=$(date +"%s")
+
+  diff=$(((DEATH_SEC - curr_sec)/(86400)))
+  proj=$((diff/(365*4)))
+  years=$((diff/365))
+  days_this_year=$((diff-years*365))
+>>>>>>> 6ce3fe111cfb47a80767ddba189e007de648a313
 
   if [[ QUARTER_PROGRESS ]]; then
       add_this="($( print_quarter_prog $days_this_year ))"
