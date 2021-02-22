@@ -1,0 +1,17 @@
+containers:
+  shellcheck:
+    image: koalaman/shellcheck
+    working_directory: /
+    volumes:
+      - local: DCLock
+        container: /DClock
+        options: cached
+
+tasks:
+  run_sc:
+    description: Run a shellcheck
+    group: Demo tasks
+    run:
+      container: shellcheck
+    #  entrypoint: use default shellcheck entrypoint
+      command: /DClock/DClock.sh
