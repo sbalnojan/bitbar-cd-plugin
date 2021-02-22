@@ -6,6 +6,16 @@ containers:
       - local: DCLock
         container: /DClock
         options: cached
+  runner:
+    image: alpine:3.13.2
+    working_directory: /
+    volumes:
+      - local: DCLock
+        container: /DClock
+        options: cached
+      - local: .dc_config.cfg
+        container: /root/.dc_config.cfg
+        options: cached
 
 tasks:
   run_sc:
@@ -15,3 +25,11 @@ tasks:
       container: shellcheck
     #  entrypoint: use default shellcheck entrypoint
       command: /DClock/DClock.sh
+
+  run_plugin:
+    description: Run the plugin as if run by bitbar on 2 secs
+    group: Demo tasks
+    run:
+      container: runner
+      entrypoint: watch
+      command: ./DClock/DClock.sh
